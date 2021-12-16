@@ -10,6 +10,7 @@ public class ImageDiscoverer extends Thread{
     private int width;
     private int height;
     private WritableImage destImage;
+    private ImagePlayerController controller;
 
     public ImageDiscoverer(Image img) {
         this.srcImage = img;
@@ -50,10 +51,20 @@ public class ImageDiscoverer extends Thread{
     @Override
     public void run() {
         discoverImage();
-
+        if(this.controller != null){
+            this.controller.notifyCompletet(1.0);
+        }
     }
 
     public Image getDestinationImage(){
         return destImage;
+    }
+
+    public void addObserver(ImagePlayerController controller) {
+        this.controller = controller;
+    }
+
+    public void removeObserver(ImagePlayerController controller) {
+        this.controller = null;
     }
 }

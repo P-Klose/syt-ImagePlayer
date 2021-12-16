@@ -42,7 +42,7 @@ public class ImagePlayerController {
         int width =Math.min(600, (int)(image.getWidth()*0.25));
         int height =Math.min(600, (int)(image.getHeight()*0.25));
         discoverer = new ImageDiscoverer(image);
-
+        discoverer.addObserver(this);
         imageView.setImage(discoverer.getDestinationImage());
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
@@ -63,17 +63,16 @@ public class ImagePlayerController {
         btnPause.setDisable(false);
         btnStart.setDisable(true);
         btnLoad.setDisable(true);
-        discoverer.start();
-        /*
-        try {
-            discoverer.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        btnPause.setDisable(true);
-        btnStart.setDisable(false);
-        btnLoad.setDisable(false);
-        */
 
+        discoverer.start();
     }
+
+    public void notifyCompletet(double percentCompletet) {
+        if(percentCompletet == 1.0){
+            btnPause.setDisable(true);
+            btnStart.setDisable(false);
+            btnLoad.setDisable(false);
+        }
+    }
+
 }
