@@ -29,6 +29,15 @@ public class ImageDiscoverer {
         }
     }
 
+    public void discoverImage(){
+        for (int row = 0; row < height; row++) {
+            for (int column = 0; column < width; column++) {
+                Color c = srcImage.getPixelReader().getColor(row,column);
+                destImage.getPixelWriter().setColor(column,row,c);
+            }
+        }
+    }
+
     public Image getDestinationImage(){
         return destImage;
     }
