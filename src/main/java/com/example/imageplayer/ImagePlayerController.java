@@ -3,6 +3,7 @@ package com.example.imageplayer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,6 +19,12 @@ public class ImagePlayerController {
     public ImageView imageView;
     @FXML
     public BorderPane borderPane;
+    @FXML
+    public Button btnStart;
+    @FXML
+    public Button btnLoad;
+    @FXML
+    public Button btnPause;
 
     private ImageDiscoverer discoverer;
     @FXML
@@ -51,7 +58,22 @@ public class ImagePlayerController {
         }
     }
 
+    @FXML
     public void onDiscoverImageClicked(ActionEvent actionEvent) {
+        btnPause.setDisable(false);
+        btnStart.setDisable(true);
+        btnLoad.setDisable(true);
         discoverer.start();
+        /*
+        try {
+            discoverer.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        btnPause.setDisable(true);
+        btnStart.setDisable(false);
+        btnLoad.setDisable(false);
+        */
+
     }
 }

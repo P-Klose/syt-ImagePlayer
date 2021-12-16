@@ -50,6 +50,7 @@ public class ImageDiscoverer extends Thread{
     @Override
     public void run() {
         discoverImage();
+
     }
 
     public Image getDestinationImage(){
