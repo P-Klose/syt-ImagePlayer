@@ -19,19 +19,22 @@ public class ImagePlayerController {
     @FXML
     public BorderPane borderPane;
 
+    private ImageDiscoverer discoverer;
     @FXML
     public void onLoadClicked(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image");
         fileChooser.setInitialDirectory(new File("./src/images"));
         File imageFile = fileChooser.showOpenDialog(null);
-        filepath.setText(imageFile.getName());
-        setImage(new Image(imageFile.toURI().toString()));
+        if(imageFile != null){
+            filepath.setText(imageFile.getName());
+            setImage(new Image(imageFile.toURI().toString()));
+        }
     }
     private void setImage(Image image){
         int width =Math.min(600, (int)(image.getWidth()*0.25));
         int height =Math.min(600, (int)(image.getHeight()*0.25));
-        ImageDiscoverer discoverer = new ImageDiscoverer(image);
+        discoverer = new ImageDiscoverer(image);
 
         imageView.setImage(discoverer.getDestinationImage());
         imageView.setFitWidth(width);
@@ -46,5 +49,9 @@ public class ImagePlayerController {
         if (scene != null){
             scene.getWindow().sizeToScene();
         }
+    }
+
+    public void onDiscoverImageClicked(ActionEvent actionEvent) {
+        discoverer.start();
     }
 }

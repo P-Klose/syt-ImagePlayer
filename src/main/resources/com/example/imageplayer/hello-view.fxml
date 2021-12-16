@@ -21,7 +21,7 @@
          <children>
                 <Button onAction="#onLoadClicked" prefWidth="118.0" text="Load Image" />
             <Label fx:id="filepath" text="Label" />
-            <Button mnemonicParsing="false" text="Button" />
+            <Button onAction="#onDiscoverImageClicked" mnemonicParsing="false" text="Start discover Image" />
             <Button mnemonicParsing="false" text="Button" />
          </children>
          <BorderPane.margin>
@@ -30,6 +30,6 @@
       </FlowPane>
    </bottom>
    <center>
-      <ImageView fx:id="imageview" fitHeight="335.0" fitWidth="390.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+      <ImageView fx:id="imageView" fitHeight="335.0" fitWidth="390.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </center>
    </BorderPane>

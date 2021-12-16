@@ -1,10 +1,11 @@
 package com.example.imageplayer;
 
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
-public class ImageDiscoverer {
+public class ImageDiscoverer extends Thread{
     private Image srcImage;
     private int width;
     private int height;
@@ -31,11 +32,24 @@ public class ImageDiscoverer {
 
     public void discoverImage(){
         for (int row = 0; row < height; row++) {
-            for (int column = 0; column < width; column++) {
-                Color c = srcImage.getPixelReader().getColor(row,column);
-                destImage.getPixelWriter().setColor(column,row,c);
+            int localRow = row;
+            Platform.runLater(()->{
+                for (int column = 0; column < width; column++) {
+                    Color c = srcImage.getPixelReader().getColor(column,localRow);
+                    destImage.getPixelWriter().setColor(column,localRow,c);
+                }
+            });
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void run() {
+        discoverImage();
     }
 
     public Image getDestinationImage(){
