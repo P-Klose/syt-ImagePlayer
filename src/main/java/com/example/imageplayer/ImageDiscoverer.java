@@ -6,21 +6,21 @@ import javafx.scene.paint.Color;
 
 public class ImageDiscoverer {
     private Image srcImage;
-    private int with;
+    private int width;
     private int height;
     private WritableImage destImage;
 
     public ImageDiscoverer(Image img) {
         this.srcImage = img;
-        this.with = (int)srcImage.getWidth();
+        this.width = (int)srcImage.getWidth();
         this.height = (int)srcImage.getHeight();
-        destImage = new WritableImage(with,height);
+        destImage = new WritableImage(width,height);
         initPixels();
     }
 
     private void initPixels() {
         for (int row = 0; row < height; row++) {
-            for (int column = 0; column < with; column++) {
+            for (int column = 0; column < width; column++) {
                 Color c = Color.rgb(
                         (int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255), 0.5
                 );

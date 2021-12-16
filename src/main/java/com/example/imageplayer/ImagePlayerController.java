@@ -15,7 +15,7 @@ public class ImagePlayerController {
     @FXML
     public Label filepath;
     @FXML
-    public ImageView imageview;
+    public ImageView imageView;
     @FXML
     public BorderPane borderPane;
 
@@ -33,11 +33,11 @@ public class ImagePlayerController {
         int height =Math.min(600, (int)(image.getHeight()*0.25));
         ImageDiscoverer discoverer = new ImageDiscoverer(image);
 
-        imageview.setImage(discoverer.getDestinationImage());
-        imageview.setFitWidth(width);
-        imageview.setFitHeight(height);
+        imageView.setImage(discoverer.getDestinationImage());
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
         borderPane.setCenter(null);
-        borderPane.setCenter(imageview);
+        borderPane.setCenter(imageView);
         //borderPane.setPrefHeight(height + buttonBar.getPrefHeight());
         borderPane.setPrefHeight(height + 25);
         //borderPane.setPrefWidth(Math.max(width, buttonBar.getPrefWidth()));
