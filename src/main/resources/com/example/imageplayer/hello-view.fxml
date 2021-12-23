@@ -22,7 +22,7 @@
             <Button fx:id="btnLoad" onAction="#onLoadClicked" prefWidth="118.0" text="Load Image" />
             <Label fx:id="filepath" text="Label" />
             <Button fx:id="btnStart" onAction="#onDiscoverImageClicked" mnemonicParsing="false" text="Start discover Image" />
-            <Button fx:id="btnPause" mnemonicParsing="false" text="Pause" disable="true"/>
+            <Button fx:id="btnPause" onAction="#onPauseClicked" mnemonicParsing="false" text="Pause" disable="true"/>
          </children>
          <BorderPane.margin>
             <Insets />

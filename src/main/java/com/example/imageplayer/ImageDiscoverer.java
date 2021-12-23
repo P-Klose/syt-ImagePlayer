@@ -11,6 +11,7 @@ public class ImageDiscoverer extends Thread{
     private int height;
     private WritableImage destImage;
     private ImagePlayerController controller;
+    private boolean isRunning;
 
     public ImageDiscoverer(Image img) {
         this.srcImage = img;
@@ -32,19 +33,31 @@ public class ImageDiscoverer extends Thread{
     }
 
     public void discoverImage(){
+        isRunning = true;
         for (int row = 0; row < height; row++) {
-            int localRow = row;
-            Platform.runLater(()->{
-                for (int column = 0; column < width; column++) {
-                    Color c = srcImage.getPixelReader().getColor(column,localRow);
-                    destImage.getPixelWriter().setColor(column,localRow,c);
+            if(isRunning){
+                int localRow = row;
+                Platform.runLater(()->{
+                    for (int column = 0; column < width; column++) {
+                        Color c = srcImage.getPixelReader().getColor(column,localRow);
+                        destImage.getPixelWriter().setColor(column,localRow,c);
+                    }
+                });
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            });
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            }else{
+                try {
+                    synchronized (this){
+                        this.wait();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+
         }
     }
 
@@ -66,5 +79,17 @@ public class ImageDiscoverer extends Thread{
 
     public void removeObserver(ImagePlayerController controller) {
         this.controller = null;
+    }
+
+    public void pauseDiscoverer() {
+        synchronized (this){
+            this.isRunning = false;
+        }
+    }
+    public synchronized void continiousDiscoverer(){
+        synchronized (this){
+            this.isRunning = true;
+            notifyAll();
+        }
     }
 }

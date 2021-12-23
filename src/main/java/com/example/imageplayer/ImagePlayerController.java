@@ -75,4 +75,14 @@ public class ImagePlayerController {
         }
     }
 
+    @FXML
+    public void onPauseClicked(ActionEvent actionEvent) {
+        if(btnPause.getText().equalsIgnoreCase("pause")){
+            btnPause.setText("Resume");
+            discoverer.pauseDiscoverer();
+        }else{
+            btnPause.setText("Pause");
+            discoverer.continiousDiscoverer();
+        }
+    }
 }
